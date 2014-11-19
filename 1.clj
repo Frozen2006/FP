@@ -3,6 +3,7 @@
 ;; right.
 (require '[clojure.string :as str])
 
+
 ;;CONSTANTS
 (def Ra 3)
 (def Rb (* 1.5 Ra))
@@ -58,8 +59,10 @@
 
 
 
+
 (defn recalcCurrentPotencial [el, kernel] (
-                                    create-point-with-dist (:coordinates el) (- (:distance el) (* (:distance kernel) revised-potential (hamming-distance el kernel)))
+                                    ;;assoc :distance (- (:distance el) (* (:distance kernel) (revised-potential (hamming-distance el kernel))))
+                                        [1]
                                   ))
 
 (defn recalculatePotencials [potencoals kernel]
@@ -73,27 +76,11 @@
 (def potencals (getPotentialsVector sourceData))
 (let [firstPotencial (last (sort-by :distance potencals))]
 
-  (let [recalculated (recalculatePotencials potencals firstPotencial)]
-;;why 1 el?
-;;  (loop [kernels [firstPotencial] elements (rest potencals)]
+  ;;(recalculatePotencials potencals )
 
-
-;;    )
+  )
 
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-  ))
 
