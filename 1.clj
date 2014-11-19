@@ -58,16 +58,42 @@
 
 
 
+(defn recalcCurrentPotencial [el, kernel] (
+                                    create-point-with-dist (:coordinates el) (- (:distance el) (* (:distance kernel) revised-potential (hamming-distance el kernel)))
+                                  ))
 
-
+(defn recalculatePotencials [potencoals kernel]
+  (map #(recalcCurrentPotencial %1 kernel) potencoals)
+  )
 
 
 ;;MAIN
 
 
 (def potencals (getPotentialsVector sourceData))
+(let [firstPotencial (last (sort-by :distance potencals))]
 
-(sort-by :distance potencals)
+  (let [recalculated (recalculatePotencials potencals firstPotencial)]
+;;why 1 el?
+;;  (loop [kernels [firstPotencial] elements (rest potencals)]
 
 
+;;    )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  ))
 
