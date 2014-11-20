@@ -4,18 +4,25 @@
 (require '[clojure.string :as str])
 
 
+(def args *command-line-args*)
+
+(println args)
+(def DistanceName (last args))
+(def fileContent (slurp (first args)))
+
 ;;CONSTANTS
-(def DistanceName "Eq")
+;(def DistanceName "Hamming")
 (def Ra 3)
 (def Rb (* 1.5 Ra))
 (def EpsHigh 0.5)
 (def EpsLow 0.15)
 
+
 (defn parse-int [s]
    (Integer. (re-find  #"\d+" s )))
 
 ;;Load file
-(def fileContent (slurp "C:/butterfly.txt"))
+;(def fileContent (slurp "C:/butterfly.txt"))
 (def lines (str/split fileContent #"\r\n"))
 
 (def removieSpace (fn[el](str/replace el " ", "")))
@@ -115,3 +122,4 @@
   )
 
 
+;(-main "butterfly.txt" "Hamming")
