@@ -61,26 +61,43 @@
 
 
 (defn recalcCurrentPotencial [el, kernel] (
-                                    ;;assoc :distance (- (:distance el) (* (:distance kernel) (revised-potential (hamming-distance el kernel))))
-                                        [1]
+                                    assoc el :distance (- (:distance el) (* (:distance kernel) (revised-potential (hamming-distance el kernel))))
                                   ))
+
 
 (defn recalculatePotencials [potencoals kernel]
   (map #(recalcCurrentPotencial %1 kernel) potencoals)
   )
 
 
+
+(defn calculate-min-distance
+  [point points]
+  (->> (map #(hamming-distance (:coordinates point) (:coordinates %1)) points)
+       (apply min)))
+
+
 ;;MAIN
 
 
-(def potencals (getPotentialsVector sourceData))
-(let [firstPotencial (last (sort-by :distance potencals))]
+(def potencals (sort-by :distance (getPotentialsVector sourceData)))
+(let [firstPotencial (last potencals)]
+  (loop [kernels [firstPotencial] elements (drop-last potencals)]
+     (let [recalculatedPotencials (sort-by :distance (recalculatePotencials elements (first kernels)))]
 
-  ;;(recalculatePotencials potencals )
+       (let [newPotencial (last recalculatedPotencials)]
+         (cond
+          (> (:distance newPotencial) (* EpsHigh (:distance firstPotencial))) (recur (cons newPotencial kernels) (drop-last recalculatedPotencials))
+          (< (:distance newPotencial) (* EpsLow (:distance firstPotencial))) (sort-by :distance kernels)
+          (>= (+ (/ (calculate-min-distance newPotencial kernels) Ra) (/ (:distance newPotencial) (:distance firstPotencial))) 1) (recur (cons newPotencial kernels) (drop-last recalculatedPotencials))
+          :else (recur kernels (cons (assoc newPotencial :dist 0) (drop-last recalculatedPotencials)))
+          )
+
+         )
+       )
+     )
+
 
   )
-
-
-
 
 
