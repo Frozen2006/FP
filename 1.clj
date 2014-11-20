@@ -56,10 +56,7 @@
 
 ;;(hamming-distance (nth sourceData 0) (nth sourceData 1))
 
-(defn create-point-with-dist
-  [point dist]
-  (assoc {:coordinates (into [] point)} :distance dist))
-
+(defn create-point-with-dist  [point dist]  (assoc {:coordinates (into [] point)} :distance dist))
 
 
 ;;GET POTENCIALS
@@ -131,12 +128,38 @@
 
 ;;;;;;;;TESTS
 ;2
-(hamming-distance [8 1] [1 3])
+(if (=
+     (hamming-distance [8 1] [1 3])
+     2) (println "Test 1 success!") )
+
 ;7.28
-(euclidian-distance [8 1] [1 3])
+(if (=
+     (euclidian-distance [8 1] [1 3])
+     7.280109889280518) (println "Test 2 success!") )
+
 
 ;1.8222245810143747
-(calc-potencial [8 1] [[1 3] [1 5] [8 1]])
+(if (=
+     (calc-potencial [8 1] [[1 3] [1 5] [8 1]])
+     1.8222245810143747) (println "Test 3 success!") )
+
+
 
 ;1.6599134422277828
-(recalculatePotencials [{:distance 6.98564016502339, :coordinates [7 6]}] {:distance 7.905912556714458, :coordinates [1 3]})
+
+(if (=
+     (recalcCurrentPotencial {:distance 6.98564016502339, :coordinates [7 6]} {:distance 7.905912556714458, :coordinates [1 3]})
+     {:coordinates [7 6] :distance 1.6599134422277828}) (println "Test 4 success!") )
+
+
+(if (=
+     (create-point-with-dist [7 6] 1)
+     {:coordinates [7 6] :distance 1}) (println "Test 5 success!") )
+
+
+
+
+
+
+
+
