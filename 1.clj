@@ -4,9 +4,10 @@
 (require '[clojure.string :as str])
 
 
-;(def args *command-line-args*)
+(def args *command-line-args*)
 
-(def args ["C:/butterfly.txt" "Hamming"])
+;(def args ["C:/butterfly.txt" "Hamming"])
+;(def args ["C:/glass.txt" "Hamming"])
 
 (def DistanceName (last args))
 (def fileContent (slurp (first args)))
@@ -22,12 +23,21 @@
 (defn parse-int [s]
    (Integer. (re-find  #"\d+" s )))
 
+(defn parse-float [str]
+  (let [n (read-string str)]
+       (if (number? n) n nil)))
+
+
+
+
+
+
 ;;Load file
 ;(def fileContent (slurp "C:/butterfly.txt"))
 (def lines (str/split fileContent #"\r\n"))
 
 (def removieSpace (fn[el](str/replace el " ", "")))
-(def getSubvector (fn[el](map parse-int (str/split (removieSpace el) #","))))
+(def getSubvector (fn[el](map parse-float (str/split (removieSpace el) #","))))
 (def removieLastEl (fn[el](take (- (count el) 1) el)))
 
 
@@ -128,4 +138,5 @@
 ;1.8222245810143747
 (calc-potencial [8 1] [[1 3] [1 5] [8 1]])
 
-
+;1.6599134422277828
+(recalculatePotencials [{:distance 6.98564016502339, :coordinates [7 6]}] {:distance 7.905912556714458, :coordinates [1 3]})
