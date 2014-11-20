@@ -4,6 +4,12 @@
 (require '[clojure.string :as str])
 
 
+(def args *command-line-args*)
+
+(println args)
+(def DistanceName (last args))
+(def fileContent (slurp (first args)))
+
 ;;CONSTANTS
 ;(def DistanceName "Hamming")
 (def Ra 3)
@@ -11,8 +17,6 @@
 (def EpsHigh 0.5)
 (def EpsLow 0.15)
 
-
-(defn MainLogic [fileContent]
 
 (defn parse-int [s]
    (Integer. (re-find  #"\d+" s )))
@@ -115,20 +119,6 @@
 
     (print "Reult:")
     (println result)
-  )
-
-)
-
-
-(def args *command-line-args*)
-
-(defn -main
-  []
-  (println args)
-  (println (last args))
-  (def DistanceName (last args))
-  (def fileContent (slurp first args))
-  (MainLogic fileContent)
   )
 
 
