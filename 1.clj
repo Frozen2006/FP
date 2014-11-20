@@ -4,9 +4,9 @@
 (require '[clojure.string :as str])
 
 
-(def args *command-line-args*)
+;(def args *command-line-args*)
 
-;(def args ["C:/glass.txt" "Hamming"])
+(def args ["C:/butterfly.txt" "Hamming"])
 
 (def DistanceName (last args))
 (def fileContent (slurp (first args)))
@@ -63,9 +63,8 @@
 
 
 (defn calc-potencial [item items]
-  (potential (reduce + (map #(calculate-distance item %1) items)))
+  (reduce + (map #(potential %1) (map #(calculate-distance item %1)  items)))
   )
-
 
 (defn getPotentialsVector [elements]
   (map #(create-point-with-dist %1 (calc-potencial %1 elements)) elements))
@@ -116,3 +115,17 @@
 
 
 ;(-main "butterfly.txt" "Hamming")
+
+
+
+
+;;;;;;;;TESTS
+;2
+(hamming-distance [8 1] [1 3])
+;7.28
+(euclidian-distance [8 1] [1 3])
+
+;1.8222245810143747
+(calc-potencial [8 1] [[1 3] [1 5] [8 1]])
+
+
