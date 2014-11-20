@@ -4,9 +4,9 @@
 (require '[clojure.string :as str])
 
 
-;(def args *command-line-args*)
+(def args *command-line-args*)
 
-(def args ["C:/glass.txt" "Hamming"])
+;(def args ["C:/glass.txt" "Hamming"])
 
 (def DistanceName (last args))
 (def fileContent (slurp (first args)))
