@@ -4,9 +4,10 @@
 (require '[clojure.string :as str])
 
 
-(def args *command-line-args*)
+;(def args *command-line-args*)
 
-(println args)
+(def args ["C:/glass.txt" "Hamming"])
+
 (def DistanceName (last args))
 (def fileContent (slurp (first args)))
 
@@ -81,14 +82,6 @@
 (defn recalculatePotencials [potencoals kernel]
   (map #(recalcCurrentPotencial %1 kernel) potencoals)
   )
-
-
-
-(def kern {:distance 2.9374821117108028E-30, :coordinates [5 3]})
-(def els
-[{:distance 2.4408357381215022E-83, :coordinates [8 1]} {:distance 7.276028788610185E-80, :coordinates [1 0]} {:distance 7.276028788610185E-80, :coordinates [7 6]} {:distance 1.2833033941286201E-75, :coordinates [0 3]} {:distance 2.5596432601257677E-67, :coordinates [1 5]} {:distance 1.1958644107155672E-52, :coordinates [7 3]} {:distance 6.529198451554616E-51, :coordinates [2 1]} {:distance 6.529198451554616E-51, :coordinates [6 5]} {:distance 2.2856936767186716E-49, :coordinates [6 1]} {:distance 2.2010549684107007E-43, :coordinates [2 4]} {:distance 1.3022967824295389E-42, :coordinates [2 2]} {:distance 1.3022967824295389E-42, :coordinates [5 5]} {:distance 4.55898460262208E-41, :coordinates [6 2]} {:distance 4.96473590646251E-31, :coordinates [3 3]}]
-)
-
 
 
 (defn calculate-min-distance
